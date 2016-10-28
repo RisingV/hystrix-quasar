@@ -1,0 +1,2 @@
+net.vickymedia.hystrix.annotation.EnableHystrixFiberExecution=\
+net.vickymedia.hystrix.spring.HystrixFiberExecutionConfiguration

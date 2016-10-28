@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: co.paralleluniverse:quasar-core:jdk8:0.7.4">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/co.paralleluniverse/quasar-core/0.7.4/d42633f467b0849890269784f61c1e94777b0f89/quasar-core-0.7.4-jdk8.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/co.paralleluniverse/quasar-core/0.7.4/2f9b05d7acd7c9bb7c699824498fee9b04295733/quasar-core-0.7.4-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

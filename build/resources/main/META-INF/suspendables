@@ -1,0 +1,17 @@
+rx.Observable.subscribe
+rx.Observable$2.call
+rx.Observable.unsafeSubscribe
+rx.internal.operators.OperatorSubscribeOn$1$1.call
+rx.internal.operators.OperatorSubscribeOn$1$1$1.onNext
+rx.internal.operators.OperatorSubscribeOn$1$1$1.onError
+rx.Scheduler$Worker$1.call
+rx.internal.operators.OperatorWindowWithTime$ExactSubscriber$2.call
+rx.internal.operators.OperatorWindowWithTime$ExactSubscriber.replaceSubject
+rx.internal.operators.DeferredScalarSubscriber.onCompleted
+rx.internal.operators.DeferredScalarSubscriber.complete
+rx.internal.operators.OperatorMerge$InnerSubscriber.onNext
+rx.internal.operators.OnSubscribeConcatMap$ConcatMapInnerSubscriber.onNext
+rx.internal.operators.OnSubscribeConcatMap$ConcatMapSubscriber.innerNext
+rx.internal.operators.OperatorWindowWithTime$ExactSubscriber.replaceSubject
+rx.observers.SerializedObserver.onNext
+rx.observers.SerializedObserver.onNext

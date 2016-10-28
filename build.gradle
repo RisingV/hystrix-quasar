@@ -1,0 +1,109 @@
+group 'net.vickymedia'
+version '0.1-SNAPSHOT'
+
+apply plugin: 'java'
+
+ext.hystrixVer      = '1.5.6'
+ext.classifier      = ':jdk8' // ':'
+ext.quasarVer       = '0.7.4'
+ext.springVer       = '4.3.3.RELEASE'
+ext.springBootVer   = '1.4.1.RELEASE'
+ext.hystrixStarterVer  = '1.2.1.RELEASE'
+ext.springCloudVer  = '1.1.4.RELEASE'
+ext.comsatVer       = '0.7.0'
+
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+configurations {
+    // ...
+    quasar
+}
+
+repositories {
+    mavenCentral()
+}
+
+//configurations.all {
+//    resolutionStrategy {
+//        failOnVersionConflict()
+//    }
+//}
+
+dependencies {
+//    compile "com.netflix.rxjava:rxjava-quasar:0.20.7"
+    compile "io.reactivex:rxjava:1.2.0"
+    compile "org.springframework:spring-context:${springVer}"
+    compile "org.springframework.boot:spring-boot-autoconfigure:${springBootVer}"
+    compile "org.springframework.cloud:spring-cloud-commons:${springCloudVer}"
+    compile "com.netflix.hystrix:hystrix-core:${hystrixVer}"
+    compile "co.paralleluniverse:quasar-core:${quasarVer}${classifier}"
+    compile "co.paralleluniverse:comsat-spring-boot:${comsatVer}"
+//    compile "com.netflix.hystrix:hystrix-javanica:${hystrixVer}"
+    quasar "co.paralleluniverse:quasar-core:${quasarVer}${classifier}@jar"
+
+    testRuntime "org.springframework.boot:spring-boot-starter-jetty:${springBootVer}"
+    testCompile "com.netflix.hystrix:hystrix-javanica:${hystrixVer}"
+    testCompile "org.springframework.boot:spring-boot-starter:${springBootVer}"
+    testCompile "co.paralleluniverse:comsat-spring-webmvc:${comsatVer}"
+    testCompile "org.springframework.boot:spring-boot-starter-test:${springBootVer}"
+    testCompile ("org.springframework.cloud:spring-cloud-starter-hystrix:${hystrixStarterVer}") {
+//        exclude group: 'org.springframework.cloud', module: 'spring-cloud-starter'
+    }
+    testCompile ("org.springframework.boot:spring-boot-starter-web:${springBootVer}") {
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
+    }
+    testCompile ("co.paralleluniverse:comsat-test-utils:${comsatVer}") {
+        exclude group: 'org.eclipse.jetty', module: '*'
+        exclude group: 'org.eclipse.jetty.websocket', module: '*'
+        exclude group: 'org.glassfish.jersey.core', module: '*'
+        exclude group: 'org.glassfish.jersey.media', module: '*'
+        exclude group: 'io.undertow', module: '*'
+        exclude group: 'com.h2database', module: '*'
+        exclude group: 'org.apache.tomcat', module: '*'
+        exclude group: 'org.apache.tomcat.embed', module: '*'
+        exclude group: 'org.apache.httpcomponents', module: '*'
+    }
+
+    testCompile 'org.assertj:assertj-core:2.4.0'
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
+
+test {
+    useJUnit {
+        includeCategories 'co.paralleluniverse.test.categories.CI'
+    }
+
+    beforeTest { desc ->
+        logger.quiet("Running test: " + desc)
+    }
+
+    afterTest { desc, result ->
+        if(result.resultType == TestResult.ResultType.FAILURE) {
+            logger.quiet("Failed test ${desc.name} [${desc.className}] with exception: ${result.exception}")
+            if(result.exception != null) {
+                result.exception.printStackTrace()
+            }
+        }
+    }
+}
+
+tasks.withType(Test) {
+    useJUnit()
+    jvmArgs "-Dco.paralleluniverse.fibers.verifyInstrumentation=true"
+    jvmArgs "-javaagent:${configurations.quasar.singleFile}=bm"
+    jvmArgs "-Xdebug -Xrunjdwp:transport=dt_socket,address=7070,server=y,suspend=n"
+    doLast() {
+        println "file://" + getReports().getHtml().getDestination() + "/index.html"
+    }
+}
+
+task suspendableScan << {
+    ant.taskdef(name:'scanSuspendables', classname:'co.paralleluniverse.fibers.instrument.SuspendablesScanner',
+            classpath: "build/classes/main:build/resources/main:${configurations.runtime.asPath}")
+    ant.scanSuspendables(
+            auto: true,
+            suspendablesFile: "$sourceSets.main.output.resourcesDir/META-INF/suspendables",
+            supersFile: "$sourceSets.main.output.resourcesDir/META-INF/suspendable-supers") {
+        fileset(dir: sourceSets.main.output.classesDir)
+    }
+}

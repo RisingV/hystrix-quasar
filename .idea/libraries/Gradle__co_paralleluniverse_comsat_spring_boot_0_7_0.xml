@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: co.paralleluniverse:comsat-spring-boot:0.7.0">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/co.paralleluniverse/comsat-spring-boot/0.7.0/72caa94884bb151e4595daa8add70e97820ee902/comsat-spring-boot-0.7.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/co.paralleluniverse/comsat-spring-boot/0.7.0/7f0c4252427d8ad8e5f99296b4fa3dd72088eb44/comsat-spring-boot-0.7.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

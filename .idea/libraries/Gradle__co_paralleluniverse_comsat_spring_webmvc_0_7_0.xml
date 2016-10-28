@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: co.paralleluniverse:comsat-spring-webmvc:0.7.0">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/co.paralleluniverse/comsat-spring-webmvc/0.7.0/23b4d1ec9d0426db581a76ffadb5ad261600be30/comsat-spring-webmvc-0.7.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/co.paralleluniverse/comsat-spring-webmvc/0.7.0/461eec921318a9833b29e40b0eb40b56539fae34/comsat-spring-webmvc-0.7.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
